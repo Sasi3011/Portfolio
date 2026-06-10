@@ -37,7 +37,12 @@ const projects: Project[] = [
       { name: "Firebase", icon: "firebase", color: "FFCA28" },
       { name: "Figma", icon: "figma", color: "F24E1E" },
     ],
-    features: ["Athlete Management", "Event Tracking", "Performance Analytics", "Responsive Dashboard"],
+    features: [
+      "Athlete Management",
+      "Event Tracking",
+      "Performance Analytics",
+      "Responsive Dashboard",
+    ],
     accent: "#6366F1",
     accentAlt: "#8B5CF6",
     github: "https://github.com/sasikiran-tt/athlixir",
@@ -55,7 +60,12 @@ const projects: Project[] = [
       { name: "React.js", icon: "react", color: "61DAFB" },
       { name: "Node.js", icon: "nodedotjs", color: "339933" },
     ],
-    features: ["User Authentication", "Product Management", "Invoice Generation", "Payment Tracking"],
+    features: [
+      "User Authentication",
+      "Product Management",
+      "Invoice Generation",
+      "Payment Tracking",
+    ],
     accent: "#10B981",
     accentAlt: "#059669",
     github: "https://github.com/sasikiran-tt/billing-software",
@@ -75,7 +85,9 @@ function ProjectPreview({ p }: { p: Project }) {
           <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/90" />
         </div>
         <div className="mx-auto flex min-w-0 max-w-[220px] flex-1 items-center justify-center rounded-md border border-slate-200/80 bg-white px-3 py-1">
-          <span className="truncate font-mono text-[10px] text-slate-400">{p.previewUrl}</span>
+          <span className="truncate font-mono text-[10px] text-slate-400">
+            {p.previewUrl}
+          </span>
         </div>
       </div>
 
@@ -105,8 +117,12 @@ function ProjectPreview({ p }: { p: Project }) {
             </span>
             <FolderKanban className="h-4 w-4" style={{ color: p.accent }} />
           </div>
-          <p className="hero-headline text-xl font-bold tracking-[0.04em] text-slate-900 sm:text-2xl">{p.name}</p>
-          <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-slate-400">{p.tag}</p>
+          <p className="hero-headline text-xl font-bold tracking-[0.04em] text-slate-900 sm:text-2xl">
+            {p.name}
+          </p>
+          <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-slate-400">
+            {p.tag}
+          </p>
           <div className="mt-4 grid grid-cols-1 gap-2 min-[400px]:grid-cols-2">
             {p.features.slice(0, 4).map((f) => (
               <div
@@ -155,8 +171,12 @@ function ProjectCard({ p, reverse }: { p: Project; reverse: boolean }) {
           <span className="h-px flex-1 bg-slate-200" />
         </div>
 
-        <h3 className="hero-headline text-2xl font-bold tracking-[0.03em] text-slate-900 sm:text-3xl md:text-4xl">{p.name}</h3>
-        <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">{p.tag}</p>
+        <h3 className="hero-headline text-2xl font-bold tracking-[0.03em] text-slate-900 sm:text-3xl md:text-4xl">
+          {p.name}
+        </h3>
+        <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-primary">
+          {p.tag}
+        </p>
 
         <p className="prose-body mt-5 max-w-lg text-sm leading-relaxed text-muted-foreground sm:text-[15px]">
           {p.desc}
@@ -164,7 +184,10 @@ function ProjectCard({ p, reverse }: { p: Project; reverse: boolean }) {
 
         <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
           {p.features.map((f) => (
-            <li key={f} className="flex items-start gap-2 text-sm text-slate-600">
+            <li
+              key={f}
+              className="flex items-start gap-2 text-sm text-slate-600"
+            >
               <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
               {f}
             </li>
@@ -208,7 +231,10 @@ function ProjectCard({ p, reverse }: { p: Project; reverse: boolean }) {
               rel="noopener noreferrer"
               whileHover={{ y: -2 }}
               className="inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:opacity-90"
-              style={{ backgroundColor: p.accent, boxShadow: `0 8px 24px ${p.accent}40` }}
+              style={{
+                backgroundColor: p.accent,
+                boxShadow: `0 8px 24px ${p.accent}40`,
+              }}
             >
               <ExternalLink className="h-4 w-4" />
               Live Demo
@@ -226,7 +252,8 @@ export default function Projects() {
       <SectionTitle line1="SELECTED" line2="PROJECTS" align="left" />
 
       <p className="-mt-6 mb-10 max-w-xl text-sm leading-relaxed text-muted-foreground sm:mb-12 sm:text-[15px]">
-        End-to-end products I designed, built, and shipped — from concept and UI to deployment.
+        End-to-end products I designed, built, and shipped — from concept and UI
+        to deployment.
       </p>
 
       <div className="space-y-16 sm:space-y-20 lg:space-y-24">

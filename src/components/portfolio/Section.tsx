@@ -6,7 +6,11 @@ interface SectionProps {
   className?: string;
 }
 
-export default function Section({ id, children, className = "" }: SectionProps) {
+export default function Section({
+  id,
+  children,
+  className = "",
+}: SectionProps) {
   return (
     <section
       id={id}

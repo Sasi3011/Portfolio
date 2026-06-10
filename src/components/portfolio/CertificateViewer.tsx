@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Award, Download, ExternalLink, FileWarning, Loader2 } from "lucide-react";
+import {
+  Award,
+  Download,
+  ExternalLink,
+  FileWarning,
+  Loader2,
+} from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -33,7 +39,9 @@ async function fileExists(url: string) {
   }
 }
 
-export async function resolveCertificateSrc(base: string): Promise<string | null> {
+export async function resolveCertificateSrc(
+  base: string,
+): Promise<string | null> {
   if (hasExtension(base)) {
     return (await fileExists(base)) ? base : null;
   }
@@ -47,7 +55,9 @@ export async function resolveCertificateSrc(base: string): Promise<string | null
 }
 
 function expectedFileHint(src: string) {
-  return hasExtension(src) ? src : CERT_EXTENSIONS.map((ext) => `${src}${ext}`).join(" or ");
+  return hasExtension(src)
+    ? src
+    : CERT_EXTENSIONS.map((ext) => `${src}${ext}`).join(" or ");
 }
 
 function CertificateMedia({
@@ -146,7 +156,9 @@ export function CertificateDisplay({
     >
       <div
         className="h-1 w-full"
-        style={{ background: `linear-gradient(90deg, ${accent}, ${accentAlt})` }}
+        style={{
+          background: `linear-gradient(90deg, ${accent}, ${accentAlt})`,
+        }}
       />
 
       <div
@@ -157,13 +169,25 @@ export function CertificateDisplay({
         <div className="flex min-w-0 items-center gap-2">
           <div
             className={`grid shrink-0 place-items-center rounded-lg border ${isSmall ? "h-7 w-7" : "h-8 w-8"}`}
-            style={{ borderColor: `${accent}30`, backgroundColor: `${accent}10`, color: accent }}
+            style={{
+              borderColor: `${accent}30`,
+              backgroundColor: `${accent}10`,
+              color: accent,
+            }}
           >
             <Award className={isSmall ? "h-3.5 w-3.5" : "h-4 w-4"} />
           </div>
           <div className="min-w-0">
-            <p className={`truncate font-semibold text-slate-900 ${isSmall ? "text-[11px]" : "text-xs"}`}>{title}</p>
-            <p className={`truncate text-slate-500 ${isSmall ? "text-[10px]" : "text-[11px]"}`}>{org}</p>
+            <p
+              className={`truncate font-semibold text-slate-900 ${isSmall ? "text-[11px]" : "text-xs"}`}
+            >
+              {title}
+            </p>
+            <p
+              className={`truncate text-slate-500 ${isSmall ? "text-[10px]" : "text-[11px]"}`}
+            >
+              {org}
+            </p>
           </div>
         </div>
         <span
@@ -191,16 +215,22 @@ export function CertificateDisplay({
           style={{ backgroundColor: `${accentAlt}20` }}
         />
 
-        <div className={`relative z-10 flex h-full items-center justify-center ${isSmall ? "p-3" : "p-4 sm:p-5"}`}>
+        <div
+          className={`relative z-10 flex h-full items-center justify-center ${isSmall ? "p-3" : "p-4 sm:p-5"}`}
+        >
           {loading ? (
             <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-10">
               <Loader2 className="h-7 w-7 animate-spin text-primary" />
-              <p className="mt-3 text-xs text-slate-500">Loading certificate…</p>
+              <p className="mt-3 text-xs text-slate-500">
+                Loading certificate…
+              </p>
             </div>
           ) : !resolvedSrc ? (
             <div className="flex max-w-xs flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white px-5 py-8 text-center">
               <FileWarning className="mb-2.5 h-8 w-8 text-amber-500" />
-              <p className="text-sm font-medium text-slate-800">Certificate not added yet</p>
+              <p className="text-sm font-medium text-slate-800">
+                Certificate not added yet
+              </p>
               <p className="mt-2 text-[11px] leading-relaxed text-slate-500">
                 Add{" "}
                 <code className="rounded bg-slate-100 px-1 py-0.5 font-mono text-[10px]">
@@ -218,7 +248,9 @@ export function CertificateDisplay({
       </div>
 
       {resolvedSrc && (
-        <div className={`flex flex-wrap gap-2 border-t border-slate-100 bg-white ${isSmall ? "px-3 py-2" : "px-4 py-3"}`}>
+        <div
+          className={`flex flex-wrap gap-2 border-t border-slate-100 bg-white ${isSmall ? "px-3 py-2" : "px-4 py-3"}`}
+        >
           <a
             href={resolvedSrc}
             target="_blank"
@@ -250,7 +282,13 @@ interface CertificateViewerProps {
   src: string;
 }
 
-export default function CertificateViewer({ open, onOpenChange, title, org, src }: CertificateViewerProps) {
+export default function CertificateViewer({
+  open,
+  onOpenChange,
+  title,
+  org,
+  src,
+}: CertificateViewerProps) {
   const [resolvedSrc, setResolvedSrc] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -290,22 +328,30 @@ export default function CertificateViewer({ open, onOpenChange, title, org, src 
           <DialogTitle className="text-left text-base font-semibold text-slate-900 sm:text-lg">
             {title}
           </DialogTitle>
-          <DialogDescription className="text-left text-sm text-slate-500">{org}</DialogDescription>
+          <DialogDescription className="text-left text-sm text-slate-500">
+            {org}
+          </DialogDescription>
         </DialogHeader>
 
         <div className="max-h-[calc(92vh-8rem)] overflow-auto bg-slate-50 p-4 sm:p-6">
           {loading ? (
             <div className="flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-slate-200 bg-white">
               <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              <p className="mt-3 text-sm text-slate-500">Loading certificate…</p>
+              <p className="mt-3 text-sm text-slate-500">
+                Loading certificate…
+              </p>
             </div>
           ) : !resolvedSrc ? (
             <div className="flex min-h-[280px] flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white px-6 py-10 text-center">
               <FileWarning className="mb-3 h-10 w-10 text-amber-500" />
-              <p className="text-sm font-medium text-slate-800">Certificate file not found</p>
+              <p className="text-sm font-medium text-slate-800">
+                Certificate file not found
+              </p>
               <p className="mt-2 max-w-md text-xs leading-relaxed text-slate-500">
                 Add your certificate as{" "}
-                <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[11px]">{expectedFiles}</code>{" "}
+                <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[11px]">
+                  {expectedFiles}
+                </code>{" "}
                 inside <code className="font-mono">public/certificates/</code>.
               </p>
             </div>

@@ -5,93 +5,97 @@ const navLinks = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
 ];
 
 const socialLinks = [
-  { label: "LinkedIn", href: LINKEDIN_URL, Icon: Linkedin },
-  { label: "GitHub", href: GITHUB_URL, Icon: Github },
-  { label: "Email", href: `mailto:${EMAIL}`, Icon: Mail },
+  { label: "LinkedIn", href: LINKEDIN_URL, Icon: Linkedin, color: "hover:text-[#0A66C2] hover:border-[#0A66C2]/30 hover:bg-[#0A66C2]/5" },
+  { label: "GitHub", href: GITHUB_URL, Icon: Github, color: "hover:text-[#181717] hover:border-[#181717]/30 hover:bg-[#181717]/5" },
+  { label: "Email", href: `mailto:${EMAIL}`, Icon: Mail, color: "hover:text-rose-500 hover:border-rose-500/30 hover:bg-rose-500/5" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-primary/10 bg-white/40 backdrop-blur-sm">
-      <div className="mx-auto max-w-[1400px] px-4 py-12 sm:px-6 md:px-10 md:py-14">
-        <div className="grid gap-10 md:grid-cols-12 md:gap-8">
-          {/* Brand */}
-          <div className="md:col-span-5">
-            <div className="flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-primary to-cyan-500 text-sm font-bold text-white shadow-sm">
-                S
-              </span>
-              <div>
-                <p className="hero-headline text-lg font-bold tracking-[0.03em] text-slate-900">Sasikiran T.T.</p>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-primary">
-                  Full Stack · UI/UX · Founder
-                </p>
-              </div>
-            </div>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Building digital products with design-led thinking and founder energy. Let&apos;s create something meaningful together.
+    <footer className="relative w-full overflow-hidden border-t border-slate-200 bg-white pt-20 sm:pt-32">
+      <div className="mx-auto max-w-[1400px] px-6 sm:px-10">
+        
+        {/* Top Section: CTA & Links */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 md:gap-0">
+          
+          {/* Left: Call to Action & Socials */}
+          <div className="max-w-xl">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-4">
+              Have an idea in mind?
+            </h2>
+            <p className="text-lg text-slate-500 mb-8 max-w-md leading-relaxed">
+              Let's collaborate to build digital products with design-led thinking and founder energy.
             </p>
+            
+            <div className="flex flex-wrap gap-3 sm:gap-4">
+              {socialLinks.map(({ label, href, Icon, color }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`group flex items-center gap-2.5 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${color}`}
+                >
+                  <Icon className="h-4 w-4 transition-transform group-hover:scale-110" />
+                  {label}
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Quick links */}
-          <div className="md:col-span-3">
-            <p className="mb-4 font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground/70">
-              Navigate
+          {/* Right: Navigation Links */}
+          <div className="flex flex-col items-start md:items-end w-full md:w-auto">
+            <p className="mb-6 font-mono text-[10px] font-bold uppercase tracking-widest text-slate-400">
+              Navigation
             </p>
-            <ul className="space-y-2.5">
+            <ul className="flex flex-row md:flex-col flex-wrap gap-4 md:gap-3">
               {navLinks.map(({ label, href }) => (
                 <li key={label}>
                   <a
                     href={href}
-                    className="inline-flex items-center gap-1 text-sm text-slate-600 transition hover:text-primary"
+                    className="group inline-flex items-center gap-1.5 text-base md:text-lg font-medium text-slate-500 transition-colors hover:text-slate-900"
                   >
                     {label}
-                    <ArrowUpRight className="h-3 w-3 opacity-0 transition group-hover:opacity-100" />
+                    <ArrowUpRight className="h-4 w-4 opacity-0 -translate-x-2 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 text-blue-500" />
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Social */}
-          <div className="md:col-span-4">
-            <p className="mb-4 font-mono text-[10px] font-bold uppercase tracking-widest text-muted-foreground/70">
-              Connect
-            </p>
-            <ul className="space-y-2.5">
-              {socialLinks.map(({ label, href, Icon }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2.5 text-sm text-slate-600 transition hover:text-primary"
-                  >
-                    <span className="grid h-8 w-8 place-items-center rounded-lg border border-primary/10 bg-primary/5">
-                      <Icon className="h-3.5 w-3.5 text-primary" />
-                    </span>
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
+      </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-primary/10 pt-8 sm:flex-row">
-          <p className="text-xs text-muted-foreground sm:text-sm">
+      {/* MASSIVE TYPOGRAPHY */}
+      <div className="w-full mt-20 sm:mt-32 mb-8 sm:mb-12 flex justify-center relative group cursor-default select-none px-4">
+        {/* Decorative background glow behind text */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-1/2 bg-blue-500/10 blur-[100px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+        
+        <h1 className="text-[17vw] sm:text-[16vw] font-black leading-[0.8] tracking-tighter text-slate-900/5 group-hover:text-slate-900 transition-colors duration-500 text-center uppercase">
+          LET'S TALK<span className="text-blue-500 animate-pulse">.</span>
+        </h1>
+      </div>
+
+      {/* Absolute Bottom Bar */}
+      <div className="border-t border-slate-100 bg-slate-50/50">
+        <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-4 px-6 py-6 sm:flex-row sm:px-10">
+          <p className="text-xs sm:text-sm font-medium text-slate-400">
             © {new Date().getFullYear()} Sasikiran T.T. All rights reserved.
           </p>
+          
           <a
             href="#top"
-            className="inline-flex items-center gap-1.5 rounded-full border border-primary/15 bg-primary/5 px-4 py-2 font-mono text-[10px] uppercase tracking-widest text-primary transition hover:border-primary/30 hover:bg-primary/10"
+            className="group flex items-center gap-2 font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 transition-colors hover:text-blue-500"
           >
             Back to top
-            <ArrowUpRight className="h-3 w-3 -rotate-45" />
+            <div className="flex h-6 w-6 items-center justify-center rounded-full border border-slate-200 bg-white transition-all group-hover:border-blue-500 group-hover:bg-blue-50">
+              <ArrowUpRight className="h-3 w-3 text-slate-400 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue-500" />
+            </div>
           </a>
         </div>
       </div>

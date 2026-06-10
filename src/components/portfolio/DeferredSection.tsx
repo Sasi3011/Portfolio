@@ -1,4 +1,12 @@
-import { Suspense, lazy, useEffect, useRef, useState, type ComponentType, type LazyExoticComponent } from "react";
+import {
+  Suspense,
+  lazy,
+  useEffect,
+  useRef,
+  useState,
+  type ComponentType,
+  type LazyExoticComponent,
+} from "react";
 
 function SectionFallback({ minHeight }: { minHeight: string }) {
   return (
@@ -16,6 +24,7 @@ const loaders = {
   projects: () => import("./Projects"),
   experience: () => import("./Experience"),
   achievements: () => import("./Achievements"),
+  patents: () => import("./Patents"),
   coding: () => import("./Coding"),
   why: () => import("./WhyMe"),
   vision: () => import("./Vision"),
@@ -31,6 +40,7 @@ const lazySections: Record<SectionKey, LazyExoticComponent<ComponentType>> = {
   projects: lazy(loaders.projects),
   experience: lazy(loaders.experience),
   achievements: lazy(loaders.achievements),
+  patents: lazy(loaders.patents),
   coding: lazy(loaders.coding),
   why: lazy(loaders.why),
   vision: lazy(loaders.vision),

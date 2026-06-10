@@ -1,215 +1,233 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
+import { 
+  MousePointer2, 
+  Type, 
+  Square, 
+  Circle, 
+  StickyNote, 
+  PenTool, 
+  Hand, 
+  MessageSquare
+} from "lucide-react";
 import Section from "./Section";
 import SectionTitle from "./SectionTitle";
 
-type TechLogo =
-  | { type: "simple"; slug: string; color: string }
-  | { type: "img"; src: string };
-
-interface TechItem {
-  name: string;
-  logo: TechLogo;
-  brandColor: string;
-}
-
-const categories: { title: string; color: string; techs: TechItem[] }[] = [
-  {
-    title: "Frontend",
-    color: "#8B5CF6",
-    techs: [
-      { name: "React.js",     logo: { type: "simple", slug: "react",       color: "61DAFB" }, brandColor: "61DAFB" },
-      { name: "TypeScript",   logo: { type: "simple", slug: "typescript",  color: "3178C6" }, brandColor: "3178C6" },
-      { name: "JavaScript",   logo: { type: "simple", slug: "javascript",  color: "F7DF1E" }, brandColor: "F7DF1E" },
-      { name: "Next.js",      logo: { type: "simple", slug: "nextdotjs",   color: "000000" }, brandColor: "475569" },
-      { name: "Tailwind CSS", logo: { type: "simple", slug: "tailwindcss", color: "06B6D4" }, brandColor: "06B6D4" },
-      { name: "HTML5",        logo: { type: "simple", slug: "html5",       color: "E34F26" }, brandColor: "E34F26" },
-      { name: "CSS3",         logo: { type: "img", src: "https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg" }, brandColor: "1572B6" },
-    ],
-  },
-  {
-    title: "Backend",
-    color: "#10B981",
-    techs: [
-      { name: "Node.js",    logo: { type: "simple", slug: "nodedotjs", color: "339933" }, brandColor: "339933" },
-      { name: "Express.js", logo: { type: "simple", slug: "express",   color: "404040" }, brandColor: "404040" },
-      { name: "NestJS",     logo: { type: "simple", slug: "nestjs",    color: "E0234E" }, brandColor: "E0234E" },
-      { name: "REST APIs",  logo: { type: "simple", slug: "swagger",   color: "85EA2D" }, brandColor: "5a7f00" },
-      { name: "Python",     logo: { type: "simple", slug: "python",    color: "3776AB" }, brandColor: "3776AB" },
-    ],
-  },
-  {
-    title: "Database",
-    color: "#3B82F6",
-    techs: [
-      { name: "MongoDB",    logo: { type: "simple", slug: "mongodb",    color: "47A248" }, brandColor: "47A248" },
-      { name: "Firebase",   logo: { type: "simple", slug: "firebase",   color: "FFCA28" }, brandColor: "f97316" },
-      { name: "PostgreSQL", logo: { type: "simple", slug: "postgresql", color: "4169E1" }, brandColor: "4169E1" },
-    ],
-  },
-  {
-    title: "Design",
-    color: "#EC4899",
-    techs: [
-      { name: "Figma", logo: { type: "img", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" }, brandColor: "F24E1E" },
-      { name: "Canva", logo: { type: "simple", slug: "canva", color: "00C4CC" }, brandColor: "00C4CC" },
-    ],
-  },
-  {
-    title: "Languages",
-    color: "#F59E0B",
-    techs: [
-      { name: "C",      logo: { type: "simple", slug: "c",         color: "00599C" }, brandColor: "00599C" },
-      { name: "C++",    logo: { type: "img", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" }, brandColor: "00599C" },
-      { name: "Python", logo: { type: "simple", slug: "python",    color: "3776AB" }, brandColor: "3776AB" },
-      { name: "Java",   logo: { type: "img", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" }, brandColor: "F89820" },
-    ],
-  },
-  {
-    title: "Tools",
-    color: "#0EA5E9",
-    techs: [
-      { name: "VS Code", logo: { type: "img", src: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/visualstudiocode.svg" }, brandColor: "007ACC" },
-      { name: "Git",     logo: { type: "simple", slug: "git",     color: "F05032" }, brandColor: "F05032" },
-      { name: "GitHub",  logo: { type: "simple", slug: "github",  color: "24292e" }, brandColor: "24292e" },
-      { name: "Postman", logo: { type: "simple", slug: "postman", color: "FF6C37" }, brandColor: "FF6C37" },
-    ],
-  },
+const frontend = [
+  { name: "React", src: "https://cdn.simpleicons.org/react/61DAFB" },
+  { name: "Next.js", src: "https://cdn.simpleicons.org/nextdotjs/000000" },
+  { name: "TypeScript", src: "https://cdn.simpleicons.org/typescript/3178C6" },
+  { name: "Tailwind", src: "https://cdn.simpleicons.org/tailwindcss/06B6D4" },
+  { name: "JavaScript", src: "https://cdn.simpleicons.org/javascript/F7DF1E" },
 ];
 
-function hexToRgba(hex: string, alpha: number) {
-  const h = hex.replace("#", "");
-  const r = parseInt(h.substring(0, 2), 16);
-  const g = parseInt(h.substring(2, 4), 16);
-  const b = parseInt(h.substring(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
+const backend = [
+  { name: "Node.js", src: "https://cdn.simpleicons.org/nodedotjs/339933" },
+  { name: "Express", src: "https://cdn.simpleicons.org/express/000000" },
+  { name: "NestJS", src: "https://cdn.simpleicons.org/nestjs/E0234E" },
+  { name: "Python", src: "https://cdn.simpleicons.org/python/3776AB" },
+];
 
-// Stagger container: triggers when it scrolls into view
-const logoContainer = {
-  hidden: {
-    transition: {
-      staggerChildren: 0.07,
-      staggerDirection: -1, // reverse order on exit
-    },
-  },
-  show: {
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.15,
-    },
-  },
-};
+const databases = [
+  { name: "MongoDB", src: "https://cdn.simpleicons.org/mongodb/47A248" },
+  { name: "PostgreSQL", src: "https://cdn.simpleicons.org/postgresql/4169E1" },
+  { name: "Firebase", src: "https://cdn.simpleicons.org/firebase/FFCA28" },
+];
 
-// Each logo pops up from below, exits downward in reverse
-const logoItem = {
-  hidden: {
-    opacity: 0,
-    y: 24,
-    scale: 0.65,
-    transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+const tools = [
+  { name: "Git", src: "https://cdn.simpleicons.org/git/F05032" },
+  { name: "Figma", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
+  { name: "VS Code", src: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/visualstudiocode.svg" },
+  { name: "Canva", src: "https://cdn.simpleicons.org/canva/00C4CC" },
+];
+
+// Helper to render a FigJam style frame
+const CanvasFrame = ({ 
+  title, 
+  data, 
+  color, 
+  delay,
+  dragConstraints 
+}: { 
+  title: string; 
+  data: typeof frontend; 
+  color: string; 
+  delay: number;
+  dragConstraints: React.RefObject<Element>;
+}) => (
+  <motion.div 
+    drag
+    dragConstraints={dragConstraints}
+    dragElastic={0.1}
+    dragMomentum={false}
+    initial={{ opacity: 0, scale: 0.9 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay }}
+    whileHover={{ zIndex: 20 }}
+    whileDrag={{ scale: 1.02, zIndex: 50, cursor: "grabbing" }}
+    className={`p-5 sm:p-6 rounded-3xl border-2 border-dashed bg-white/70 backdrop-blur-md ${color} shadow-sm w-full max-w-[360px] cursor-grab`}
+  >
+    <h3 className="text-xs font-bold uppercase tracking-widest text-slate-500 mb-5 ml-1 pointer-events-none">{title}</h3>
+    <div className="flex flex-wrap gap-3 pointer-events-none">
+      {data.map((tech) => (
+        <div 
+          key={tech.name} 
+          className="group flex items-center gap-2.5 bg-white border border-slate-200 rounded-full pr-4 pl-1.5 py-1.5 shadow-sm transition-all"
+        >
+          <div className="w-10 h-10 p-2 bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center">
+            <img src={tech.src} alt={tech.name} className="w-full h-full object-contain" loading="lazy" />
+          </div>
+          <span className="text-xs sm:text-sm font-bold text-slate-700">{tech.name}</span>
+        </div>
+      ))}
+    </div>
+  </motion.div>
+);
+
+// Multiplayer Cursor Component
+const MultiplayerCursor = ({ name, color, pathX, pathY, delay }: { name: string; color: string; pathX: string[]; pathY: string[]; delay: number }) => (
+  <motion.div
+    animate={{ x: pathX, y: pathY }}
+    transition={{ duration: 15, repeat: Infinity, ease: "linear", delay }}
+    className="absolute top-0 left-0 z-40 pointer-events-none hidden sm:block"
+  >
+    <MousePointer2 className={`w-6 h-6 ${color} fill-current drop-shadow-md`} />
+    <div className={`mt-1 ml-5 px-2.5 py-1 rounded-md text-[11px] font-bold text-white shadow-sm whitespace-nowrap w-max ${color.replace('text-', 'bg-')}`}>
+      {name}
+    </div>
+  </motion.div>
+);
 
 export default function Skills() {
+  const canvasRef = useRef<HTMLDivElement>(null);
+
   return (
-    <Section id="skills">
+    <Section id="skills" className="pt-24 md:pt-32">
       <SectionTitle
         label="Expertise"
         line1="TECHNICAL"
         line2="SKILLS"
-        description="Technologies and tools I use to design, build, and ship products."
+        description="A collaborative whiteboard view of my tech stack. Feel free to drag the frames and notes around!"
         align="right"
       />
 
-      <div className="mt-10 sm:mt-14 max-w-5xl mx-auto space-y-0">
-        {categories.map((cat, i) => (
-          <div
-            key={cat.title}
-            className={i !== categories.length - 1 ? "border-b border-slate-100" : ""}
+      {/* FigJam Canvas Container */}
+      <div 
+        ref={canvasRef}
+        className="relative w-full mt-8 rounded-3xl border border-slate-300 bg-[#F5F6F8] shadow-inner overflow-hidden min-h-[700px] z-0 p-4 sm:p-8 flex items-center justify-center"
+      >
+        
+        {/* Dot Grid Background */}
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(#d4d4d8_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-70 pointer-events-none" />
+
+        {/* Fake Multiplayer Cursors */}
+        <MultiplayerCursor 
+          name="Tech Recruiter" 
+          color="text-rose-500" 
+          pathX={["10%", "60%", "80%", "40%", "10%"]} 
+          pathY={["20%", "80%", "30%", "70%", "20%"]} 
+          delay={0} 
+        />
+        <MultiplayerCursor 
+          name="Senior Dev" 
+          color="text-blue-500" 
+          pathX={["80%", "20%", "10%", "70%", "80%"]} 
+          pathY={["70%", "30%", "80%", "20%", "70%"]} 
+          delay={5} 
+        />
+        <MultiplayerCursor 
+          name="Designer" 
+          color="text-amber-500" 
+          pathX={["50%", "90%", "30%", "10%", "50%"]} 
+          pathY={["10%", "50%", "90%", "40%", "10%"]} 
+          delay={2} 
+        />
+
+        {/* Main Canvas Content */}
+        <div className="relative w-full max-w-6xl flex flex-wrap justify-center gap-6 sm:gap-10 pb-24 z-10">
+          
+          <CanvasFrame title="Frontend Architecture" data={frontend} color="border-sky-400" delay={0.1} dragConstraints={canvasRef} />
+          
+          {/* Sticky Note 1 */}
+          <motion.div 
+            drag
+            dragConstraints={canvasRef}
+            dragElastic={0.1}
+            dragMomentum={false}
+            initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: -4 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05, zIndex: 30 }}
+            whileDrag={{ scale: 1.1, rotate: 0, zIndex: 50, cursor: "grabbing" }}
+            className="w-56 h-auto bg-[#FFEB3B] p-5 shadow-[2px_4px_16px_rgba(0,0,0,0.15)] self-center cursor-grab active:cursor-grabbing border border-[#FBC02D]/40"
           >
-            {/* Each row: fixed-width label | logos left-aligned */}
-            <div className="grid grid-cols-1 items-center gap-4 py-5 sm:grid-cols-[11.5rem_minmax(0,1fr)] sm:gap-x-8 sm:py-6 md:grid-cols-[13.5rem_minmax(0,1fr)] md:gap-x-10 lg:grid-cols-[15rem_minmax(0,1fr)]">
+            <p className="font-serif italic text-slate-800 text-[15px] font-medium leading-relaxed pointer-events-none">
+              "Building clean, scalable components is my absolute favorite part of the stack!"
+            </p>
+            <div className="mt-3 text-xs text-slate-600 font-sans font-medium pointer-events-none">Sasi</div>
+          </motion.div>
 
-              {/* Category label — fixed column so logos align and text never overlaps icons */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className="min-w-0 overflow-hidden"
-              >
-                <h3
-                  className="max-w-full text-3xl font-black leading-[0.92] tracking-tighter select-none sm:text-4xl md:text-5xl"
-                  style={{ color: cat.color }}
-                >
-                  {cat.title}
-                </h3>
-              </motion.div>
+          <CanvasFrame title="Backend & APIs" data={backend} color="border-emerald-400" delay={0.2} dragConstraints={canvasRef} />
+          
+          <CanvasFrame title="Database & Cloud" data={databases} color="border-indigo-400" delay={0.3} dragConstraints={canvasRef} />
 
-              {/* Logos — stagger in one by one on scroll */}
-              <motion.div
-                className="flex min-w-0 flex-wrap items-center gap-2.5 sm:gap-3"
-                variants={logoContainer}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: "-40px" }}
-              >
-                {cat.techs.map((tech, j) => {
-                  const iconSrc =
-                    tech.logo.type === "simple"
-                      ? `https://cdn.simpleicons.org/${tech.logo.slug}/${tech.logo.color}`
-                      : tech.logo.src;
+          {/* Sticky Note 2 */}
+          <motion.div 
+            drag
+            dragConstraints={canvasRef}
+            dragElastic={0.1}
+            dragMomentum={false}
+            initial={{ opacity: 0, scale: 0.5, rotate: 10 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 6 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05, zIndex: 30 }}
+            whileDrag={{ scale: 1.1, rotate: 0, zIndex: 50, cursor: "grabbing" }}
+            className="w-56 h-auto bg-[#FFCDD2] p-5 shadow-[2px_4px_16px_rgba(0,0,0,0.15)] self-center cursor-grab active:cursor-grabbing border border-[#EF9A9A]/40"
+          >
+            <p className="font-serif italic text-slate-800 text-[15px] font-medium leading-relaxed pointer-events-none">
+              "Always learning new system design patterns 🚀"
+            </p>
+            <div className="mt-3 text-xs text-slate-600 font-sans font-medium pointer-events-none">Guest</div>
+          </motion.div>
 
-                  return (
-                    <motion.div
-                      key={tech.name}
-                      variants={logoItem}
-                      whileHover={{ y: -5, scale: 1.15 }}
-                      className="relative group/tip cursor-default"
-                    >
-                      {/* Icon tile */}
-                      <div
-                        className="h-12 w-12 sm:h-14 sm:w-14 rounded-2xl flex items-center justify-center border-2 transition-all duration-200"
-                        style={{
-                          backgroundColor: hexToRgba(tech.brandColor, 0.08),
-                          borderColor: hexToRgba(tech.brandColor, 0.25),
-                        }}
-                      >
-                        <img
-                          src={iconSrc}
-                          alt={tech.name}
-                          className="h-6 w-6 object-contain sm:h-7 sm:w-7"
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="low"
-                        />
-                      </div>
+          <CanvasFrame title="Tools & Design" data={tools} color="border-amber-400" delay={0.4} dragConstraints={canvasRef} />
 
-                      {/* Glow on hover */}
-                      <div
-                        className="absolute inset-0 rounded-2xl opacity-0 group-hover/tip:opacity-100 transition-opacity duration-200 pointer-events-none"
-                        style={{ boxShadow: `0 0 18px ${hexToRgba(tech.brandColor, 0.45)}` }}
-                      />
+        </div>
 
-                      {/* Tooltip */}
-                      <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2.5 py-1.5 bg-slate-900 text-white text-[10px] font-semibold rounded-lg opacity-0 pointer-events-none group-hover/tip:opacity-100 transition-opacity duration-150 whitespace-nowrap z-20 shadow-xl">
-                        {tech.name}
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-[5px] border-transparent border-t-slate-900" />
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-
+        {/* Floating Toolbar */}
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-1 sm:gap-2 bg-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] border border-slate-200 z-50">
+          {[
+            { icon: MousePointer2, active: true },
+            { icon: Hand, active: false },
+            { icon: PenTool, active: false },
+            { icon: Square, active: false },
+            { icon: Circle, active: false },
+            { icon: Type, active: false },
+            { icon: StickyNote, active: false },
+            { icon: MessageSquare, active: false },
+          ].map((item, i) => (
+            <div 
+              key={i} 
+              className={`p-2 sm:p-2.5 rounded-xl cursor-pointer transition-colors ${
+                item.active 
+                  ? "bg-blue-100 text-blue-600" 
+                  : "text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+              }`}
+            >
+              <item.icon className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
+          ))}
+          
+          <div className="h-8 w-px bg-slate-200 mx-1 sm:mx-3" />
+          
+          <div className="flex -space-x-2 px-1">
+            <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-blue-500 border-2 border-white flex items-center justify-center text-[10px] sm:text-xs font-bold text-white z-30 shadow-sm">S</div>
+            <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-amber-500 border-2 border-white flex items-center justify-center text-[10px] sm:text-xs font-bold text-white z-20 shadow-sm">D</div>
+            <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-rose-500 border-2 border-white flex items-center justify-center text-[10px] sm:text-xs font-bold text-white z-10 shadow-sm">R</div>
           </div>
-        ))}
+        </div>
+
       </div>
     </Section>
   );

@@ -5,7 +5,10 @@ interface AnimatedCounterProps {
   duration?: number;
 }
 
-export default function AnimatedCounter({ value, duration = 1.8 }: AnimatedCounterProps) {
+export default function AnimatedCounter({
+  value,
+  duration = 1.8,
+}: AnimatedCounterProps) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const hasAnimated = useRef(false);
@@ -39,7 +42,7 @@ export default function AnimatedCounter({ value, duration = 1.8 }: AnimatedCount
           requestAnimationFrame(animate);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const el = ref.current;
@@ -50,5 +53,10 @@ export default function AnimatedCounter({ value, duration = 1.8 }: AnimatedCount
   }, [value, duration]);
 
   const suffix = value.replace(/\d/g, "");
-  return <span ref={ref}>{count}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {count}
+      {suffix}
+    </span>
+  );
 }

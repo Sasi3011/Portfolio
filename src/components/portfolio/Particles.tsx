@@ -9,7 +9,9 @@ export default function Particles() {
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const coarse = window.matchMedia("(pointer: coarse)").matches;
     if (!reduced && !coarse) setEnabled(true);
   }, []);
@@ -97,5 +99,10 @@ export default function Particles() {
 
   if (!enabled) return null;
 
-  return <canvas ref={ref} className="pointer-events-none fixed inset-0 -z-10 opacity-45" />;
+  return (
+    <canvas
+      ref={ref}
+      className="pointer-events-none fixed inset-0 -z-10 opacity-45"
+    />
+  );
 }

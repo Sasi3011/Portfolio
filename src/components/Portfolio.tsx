@@ -7,7 +7,9 @@ import DeferredSection from "./portfolio/DeferredSection";
 
 export default function Portfolio() {
   useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
     if (prefersReduced || coarsePointer) return;
 
@@ -70,16 +72,25 @@ export default function Portfolio() {
       <Nav />
       <main className="relative z-10">
         <Hero />
-        <DeferredSection name="about" minHeight="85dvh" rootMargin="480px 0px" />
+        <DeferredSection
+          name="about"
+          minHeight="85dvh"
+          rootMargin="480px 0px"
+        />
         <DeferredSection name="skills" minHeight="70dvh" />
         <DeferredSection name="projects" minHeight="80dvh" />
         <DeferredSection name="experience" minHeight="65dvh" />
         <DeferredSection name="achievements" minHeight="85dvh" />
+        <DeferredSection name="patents" minHeight="60dvh" />
         <DeferredSection name="coding" minHeight="75dvh" />
         <DeferredSection name="why" minHeight="55dvh" />
         <DeferredSection name="vision" minHeight="80dvh" />
         <DeferredSection name="contact" minHeight="75dvh" />
-        <DeferredSection name="footer" minHeight="20dvh" rootMargin="120px 0px" />
+        <DeferredSection
+          name="footer"
+          minHeight="20dvh"
+          rootMargin="120px 0px"
+        />
       </main>
     </div>
   );

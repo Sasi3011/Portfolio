@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { useInView } from "@/hooks/use-in-view";
+import { useEffect, useRef, useState } from "react";
 
 interface Token {
   text: string;
@@ -10,8 +9,27 @@ function tokenize(code: string, lang: string): Token[] {
   const tokens: Token[] = [];
   let i = 0;
 
-  const keywords = new Set(["const", "let", "var", "function", "return", "import", "export", "from", "class", "extends"]);
-  const keys = new Set(["name", "role", "dsa", "leetcode", "skillrack", "passions", "action"]);
+  const keywords = new Set([
+    "const",
+    "let",
+    "var",
+    "function",
+    "return",
+    "import",
+    "export",
+    "from",
+    "class",
+    "extends",
+  ]);
+  const keys = new Set([
+    "name",
+    "role",
+    "dsa",
+    "leetcode",
+    "skillrack",
+    "passions",
+    "action",
+  ]);
 
   while (i < code.length) {
     const char = code[i];
@@ -78,16 +96,28 @@ function tokenize(code: string, lang: string): Token[] {
       if (lang === "sh") {
         if (word === "#!/bin/bash" || word === "echo") {
           tokens.push({ text: word, className: "text-cyan-600" });
-        } else if (word === "Status:" || word === "Role:" || word === "Open" || word === "to" || word === "relocate/remote:") {
+        } else if (
+          word === "Status:" ||
+          word === "Role:" ||
+          word === "Open" ||
+          word === "to" ||
+          word === "relocate/remote:"
+        ) {
           tokens.push({ text: word, className: "text-amber-600" });
         } else if (word === "YES") {
-          tokens.push({ text: word, className: "text-emerald-600 font-semibold" });
+          tokens.push({
+            text: word,
+            className: "text-emerald-600 font-semibold",
+          });
         } else {
           tokens.push({ text: word, className: "" });
         }
       } else {
         if (keywords.has(word)) {
-          tokens.push({ text: word, className: "text-violet-600 font-semibold" });
+          tokens.push({
+            text: word,
+            className: "text-violet-600 font-semibold",
+          });
         } else if (keys.has(word)) {
           tokens.push({ text: word, className: "text-blue-600 font-semibold" });
         } else {
@@ -106,7 +136,7 @@ function tokenize(code: string, lang: string): Token[] {
 }
 
 export default function MockIDE() {
-  const { ref, inView } = useInView<HTMLDivElement>({ rootMargin: "80px 0px" });
+  const ref = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState(0);
   const [tokens, setTokens] = useState<Token[]>([]);
   const [visibleChars, setVisibleChars] = useState(0);
@@ -121,7 +151,7 @@ export default function MockIDE() {
   dsa: { leetcode: "100+", skillrack: "1100+" },
   passions: ["Clean Code", "Design Systems"],
   action: () => "Let's build something epic! 🚀"
-};`
+};`,
     },
     {
       name: "skills.json",
@@ -130,7 +160,7 @@ export default function MockIDE() {
   "frontend": ["React", "TypeScript", "Tailwind"],
   "backend": ["Node.js", "Express", "Postgres"],
   "design": ["Figma", "UI/UX", "Prototyping"]
-}`
+}`,
     },
     {
       name: "status.sh",
@@ -139,15 +169,13 @@ export default function MockIDE() {
 echo "DEPLOYMENT COMPLETE"
 echo "Status: Active & Searching"
 echo "Role: Full Stack / Design Intern"
-echo "Open to relocate/remote: YES"`
-    }
+echo "Open to relocate/remote: YES"`,
+    },
   ];
 
   const currentCode = snippets[activeTab].code;
 
   useEffect(() => {
-    if (!inView) return;
-
     const newTokens = tokenize(currentCode, snippets[activeTab].lang);
     setTokens(newTokens);
     setVisibleChars(0);
@@ -155,14 +183,14 @@ echo "Open to relocate/remote: YES"`
     const totalLen = currentCode.length;
     const interval = setInterval(() => {
       setVisibleChars((prev) => {
-        if (prev < totalLen) return prev + 1;
+        if (prev < totalLen) return prev + 3;
         clearInterval(interval);
         return prev;
       });
-    }, 16);
+    }, 14);
 
     return () => clearInterval(interval);
-  }, [activeTab, currentCode, inView]);
+  }, [activeTab, currentCode]);
 
   const renderTokens = () => {
     let charCount = 0;
@@ -179,14 +207,17 @@ echo "Open to relocate/remote: YES"`
       elements.push(
         <span key={i} className={token.className}>
           {textToRender}
-        </span>
+        </span>,
       );
     }
     return elements;
   };
 
   return (
-    <div ref={ref} className="cyber-scanline flex h-[260px] w-full min-w-0 flex-col overflow-hidden rounded-xl border border-primary/20 bg-[#f8fafc]/95 text-left font-mono text-[10px] leading-relaxed shadow-2xl backdrop-blur-sm sm:h-[310px] sm:text-xs">
+    <div
+      ref={ref}
+      className="cyber-scanline flex h-[260px] w-full min-w-0 flex-col overflow-hidden rounded-xl border border-primary/20 bg-[#f8fafc]/95 text-left font-mono text-[10px] leading-relaxed shadow-2xl backdrop-blur-sm sm:h-[310px] sm:text-xs"
+    >
       {/* OS Header Bar */}
       <div className="flex items-center justify-between border-b border-slate-200/60 bg-slate-100/90 px-3 py-2.5 sm:px-4 sm:py-3">
         <div className="flex items-center gap-2">
@@ -204,14 +235,18 @@ echo "Open to relocate/remote: YES"`
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <div className="hidden w-[88px] flex-col border-r border-slate-200/60 bg-slate-50/80 p-1.5 text-[10px] sm:flex">
-          <div className="mb-2 px-1 font-semibold uppercase tracking-wider text-muted-foreground/45">Files</div>
+          <div className="mb-2 px-1 font-semibold uppercase tracking-wider text-muted-foreground/45">
+            Files
+          </div>
           {snippets.map((s, idx) => (
             <button
               type="button"
               key={s.name}
               onClick={() => setActiveTab(idx)}
               className={`flex items-center gap-1 rounded px-1 py-1 text-left transition ${
-                activeTab === idx ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-slate-200/50"
+                activeTab === idx
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:bg-slate-200/50"
               }`}
             >
               <span className="text-primary/70">📄</span>
@@ -230,11 +265,15 @@ echo "Open to relocate/remote: YES"`
                 key={s.name}
                 onClick={() => setActiveTab(idx)}
                 className={`flex items-center gap-2 border-r border-slate-200/60 px-4 py-2 text-[10px] transition sm:text-xs ${
-                  activeTab === idx ? "bg-[#f8fafc] text-primary border-t-2 border-t-primary" : "text-muted-foreground hover:bg-slate-200/40"
+                  activeTab === idx
+                    ? "bg-[#f8fafc] text-primary border-t-2 border-t-primary"
+                    : "text-muted-foreground hover:bg-slate-200/40"
                 }`}
               >
                 <span>{s.name}</span>
-                {activeTab === idx && <span className="text-[6px] text-primary">●</span>}
+                {activeTab === idx && (
+                  <span className="text-[6px] text-primary">●</span>
+                )}
               </button>
             ))}
           </div>
