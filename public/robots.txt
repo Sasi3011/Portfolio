@@ -1,0 +1,30 @@
+# Robots.txt for Sasikiran T.T. Portfolio
+# https://sasikiran.dev
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Specific rules for popular search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Allow: /
+
+Sitemap: https://sasikiran.pages.dev/sitemap.xml
+Host: https://sasikiran.pages.dev

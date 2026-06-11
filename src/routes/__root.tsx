@@ -80,27 +80,54 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     head: () => ({
       meta: [
         { charSet: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { title: "Sasikiran T.T. | Full Stack Developer & UI/UX Designer" },
+        { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=5" },
+        { title: "Sasikiran T.T. | Full Stack Developer & UI/UX Designer | Portfolio" },
         {
           name: "description",
           content:
-            "Portfolio of Sasikiran T.T. — Full Stack Developer and UI/UX Designer building digital products from design to deployment.",
+            "Full Stack Developer & UI/UX Designer from India. Specializing in React, TypeScript, Web Design. Explore portfolio projects, expertise, and achievements.",
         },
         { name: "author", content: "Sasikiran T.T." },
-        { property: "og:title", content: "Sasikiran T.T. | Portfolio" },
+        { name: "keywords", content: "Full Stack Developer, UI/UX Designer, React, TypeScript, Web Development, Portfolio, India" },
+        { name: "theme-color", content: "#000000" },
+        { name: "color-scheme", content: "dark light" },
+
+        // Open Graph
+        { property: "og:title", content: "Sasikiran T.T. | Full Stack Developer & UI/UX Designer" },
         {
           property: "og:description",
           content:
-            "Full Stack Developer and UI/UX Designer — design, code, and ship products that matter.",
+            "Experienced Full Stack Developer and UI/UX Designer. Building innovative digital products with React, TypeScript, and modern web technologies.",
         },
         { property: "og:type", content: "website" },
-        { name: "twitter:card", content: "summary" },
-        { name: "twitter:site", content: "@Lovable" },
+        { property: "og:site_name", content: "Sasikiran T.T. Portfolio" },
+        { property: "og:url", content: "https://sasikiran.pages.dev" },
+        { property: "og:image", content: "https://sasikiran.pages.dev/og-image.png" },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
+
+        // Twitter Card
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: "Sasikiran T.T. | Full Stack Developer & UI/UX Designer" },
+        { name: "twitter:description", content: "Explore my portfolio of innovative digital products built with modern web technologies." },
+        { name: "twitter:image", content: "https://sasikiran.pages.dev/og-image.png" },
+
+        // Mobile
+        { name: "mobile-web-app-capable", content: "yes" },
+        { name: "apple-mobile-web-app-capable", content: "yes" },
+        { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+
+        // Additional SEO
+        { name: "language", content: "English" },
+        { name: "revisit-after", content: "30 days" },
+        { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       ],
       links: [
         { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
         { rel: "apple-touch-icon", href: "/favicon.svg" },
+        { rel: "canonical", href: "https://sasikiran.pages.dev" },
+        { rel: "sitemap", href: "/sitemap.xml" },
+        { rel: "alternate", hrefLang: "en", href: "https://sasikiran.pages.dev" },
         { rel: "stylesheet", href: appCss },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         {
@@ -118,6 +145,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=optional",
+        },
+        {
+          rel: "dns-prefetch",
+          href: "https://fonts.googleapis.com",
         },
       ],
     }),
@@ -145,8 +176,28 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Sasikiran T.T.",
+    url: "https://sasikiran.pages.dev",
+    image: "https://sasikiran.pages.dev/og-image.png",
+    jobTitle: ["Full Stack Developer", "UI/UX Designer"],
+    sameAs: [
+      "https://github.com/sasikiran",
+      "https://linkedin.com/in/sasikiran",
+      "https://twitter.com/sasikiran",
+    ],
+    description:
+      "Full Stack Developer and UI/UX Designer specializing in React, TypeScript, and modern web technologies.",
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaMarkup) }}
+      />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>

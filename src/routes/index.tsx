@@ -6,24 +6,38 @@ export const Route = createFileRoute("/")({
     meta: [
       {
         title:
-          "Sasikiran T.T. — Entrepreneur · Full Stack Developer · UI/UX Designer",
+          "Sasikiran T.T. — Full Stack Developer & UI/UX Designer | Portfolio",
       },
       {
         name: "description",
         content:
-          "Portfolio of Sasikiran T.T. — building innovative digital products through technology, design, and entrepreneurship.",
+          "Full Stack Developer & UI/UX Designer from India. Specializing in React, TypeScript, and Web Design. View portfolio projects, expertise, and achievements.",
+      },
+      {
+        name: "keywords",
+        content:
+          "Sasikiran, Full Stack Developer, UI/UX Designer, React Developer, Portfolio, Web Development",
       },
       {
         property: "og:title",
-        content: "Sasikiran T.T. — Developer & Designer Portfolio",
+        content: "Sasikiran T.T. — Full Stack Developer & UI/UX Designer",
       },
       {
         property: "og:description",
         content:
-          "Full Stack Developer, UI/UX Designer and aspiring entrepreneur. Explore projects, experience and achievements.",
+          "Innovative Full Stack Developer and UI/UX Designer. Building digital products with React, TypeScript, and modern web technologies.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://sasikiran.pages.dev" },
+      { property: "og:image", content: "https://sasikiran.pages.dev/og-image.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Sasikiran T.T. — Full Stack Developer & UI/UX Designer" },
+      {
+        name: "twitter:description",
+        content:
+          "Full Stack Developer and UI/UX Designer. Explore my portfolio of innovative projects.",
+      },
+      { name: "twitter:image", content: "https://sasikiran.pages.dev/og-image.png" },
     ],
   }),
   component: Portfolio,
