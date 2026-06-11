@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="sGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0f9ff"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#3b82f6" flood-opacity="0.3"/>
+    </filter>
+    <filter id="textShadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Dark background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+
+  <!-- Gradient overlay -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" opacity="0.8"/>
+
+  <!-- Left decorative element: Large faded S. from favicon -->
+  <g opacity="0.08" transform="translate(80, 100) scale(3)">
+    <rect width="64" height="64" rx="14" ry="14" fill="url(#bgGrad)"/>
+    <text x="22" y="54" font-family="'Space Grotesk', sans-serif" font-weight="800" font-size="42" text-anchor="middle" fill="url(#sGrad)">S</text>
+    <text x="43" y="54" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="46" text-anchor="middle" fill="#f43f5e">.</text>
+  </g>
+
+  <!-- Right decorative element: Another faded S. -->
+  <g opacity="0.06" transform="translate(1050, 450) scale(2.5)">
+    <rect width="64" height="64" rx="14" ry="14" fill="url(#bgGrad)"/>
+    <text x="22" y="54" font-family="'Space Grotesk', sans-serif" font-weight="800" font-size="42" text-anchor="middle" fill="url(#sGrad)">S</text>
+    <text x="43" y="54" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="46" text-anchor="middle" fill="#f43f5e">.</text>
+  </g>
+
+  <!-- Center logo: Larger favicon -->
+  <g transform="translate(550, 315)">
+    <g transform="scale(5)">
+      <rect width="64" height="64" rx="14" ry="14" fill="url(#bgGrad)"/>
+      <rect width="64" height="64" rx="14" ry="14" fill="none" stroke="rgba(59,130,246,0.2)" stroke-width="1.5"/>
+      <rect x="1.5" y="1.5" width="61" height="61" rx="13" ry="13" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="1"/>
+
+      <g opacity="0.95">
+        <circle cx="22" cy="13" r="4.8" fill="none" stroke="#f59e0b" stroke-width="2.2"/>
+        <circle cx="33" cy="13" r="4.8" fill="none" stroke="#f59e0b" stroke-width="2.2"/>
+      </g>
+
+      <text x="22" y="54" font-family="'Space Grotesk', sans-serif" font-weight="800" font-size="42" text-anchor="middle" fill="url(#sGrad)" filter="url(#shadow)">S</text>
+      <text x="43" y="54" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="46" text-anchor="middle" fill="#f43f5e">.</text>
+    </g>
+  </g>
+
+  <!-- Main text: Name -->
+  <text
+    x="600"
+    y="520"
+    font-family="'Space Grotesk', sans-serif"
+    font-weight="700"
+    font-size="64"
+    text-anchor="middle"
+    fill="url(#textGrad)"
+    filter="url(#textShadow)"
+  >Sasikiran T.T.</text>
+
+  <!-- Subtitle -->
+  <text
+    x="600"
+    y="575"
+    font-family="'Inter', sans-serif"
+    font-weight="400"
+    font-size="32"
+    text-anchor="middle"
+    fill="url(#sGrad)"
+    filter="url(#textShadow)"
+  >Full Stack Developer & UI/UX Designer</text>
+</svg>
