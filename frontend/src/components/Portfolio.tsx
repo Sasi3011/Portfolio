@@ -4,6 +4,7 @@ import Particles from "./portfolio/Particles";
 import Nav from "./portfolio/Nav";
 import Hero from "./portfolio/Hero";
 import DeferredSection from "./portfolio/DeferredSection";
+import IntroAnimation from "./portfolio/IntroAnimation";
 
 export default function Portfolio() {
   useEffect(() => {
@@ -68,6 +69,7 @@ export default function Portfolio() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
+      <IntroAnimation />
       <Particles />
       <Nav />
       <main className="relative z-10">

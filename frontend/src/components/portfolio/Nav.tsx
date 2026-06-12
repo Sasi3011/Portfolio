@@ -124,69 +124,26 @@ export default function Nav() {
           whileTap={{ scale: 0.98 }}
           className="group relative flex items-center select-none cursor-pointer"
         >
-          <span className="font-display text-xl font-extrabold tracking-tighter text-foreground sm:text-2xl flex items-center">
-            {/* Styled capital 'S' with orange rings above it */}
-            <span className="relative inline-block">
-              S
-              <span className="absolute -top-[7px] left-1/2 -translate-x-[45%] flex justify-center">
-                <svg
-                  className="h-2 w-4 sm:h-2.5 sm:w-5"
-                  viewBox="0 0 24 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="8"
-                    cy="6"
-                    r="4.5"
-                    stroke="#f59e0b"
-                    strokeWidth="2.2"
-                  />
-                  <circle
-                    cx="16"
-                    cy="6"
-                    r="4.5"
-                    stroke="#f59e0b"
-                    strokeWidth="2.2"
-                  />
-                </svg>
-              </span>
+          <div className="relative inline-flex items-center justify-center pt-3.5 pr-1">
+            {/* Top left orange loops */}
+            <div className="absolute left-0 top-0 flex items-center">
+              <div className="h-[9px] w-[9px] rounded-full border-[1.5px] border-[#f59e0b]" />
+              <div className="-ml-1 h-[9px] w-[9px] rounded-full border-[1.5px] border-[#f59e0b]" />
+            </div>
+            
+            {/* Top right blue/black circle */}
+            <div className="absolute right-2 top-1 h-[8px] w-[8px] overflow-hidden rounded-full">
+              <div className="absolute inset-0 w-1/2 bg-[#0ea5e9]" />
+              <div className="absolute inset-0 left-1/2 w-1/2 bg-[#0f172a]" />
+            </div>
+
+            <span className="hero-headline text-xl font-extrabold tracking-tight text-foreground sm:text-2xl leading-none">
+              Sasi
             </span>
-
-            {/* 'as' */}
-            <span>as</span>
-
-            {/* Styled 'i' with custom contrast dot */}
-            <span className="relative inline-block">
-              ı
-              <span className="absolute -top-[1.5px] left-1/2 -translate-x-[50%] flex items-center justify-center">
-                <svg
-                  className="h-1.5 w-1.5 sm:h-2 sm:w-2"
-                  viewBox="0 0 10 10"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  {/* Left half filled blue */}
-                  <path d="M5,0.5 A4.5,4.5 0 0,0 5,9.5 Z" fill="#0ea5e9" />
-                  {/* Right half filled dark slate */}
-                  <path d="M5,0.5 A4.5,4.5 0 0,1 5,9.5 Z" fill="#0f172a" />
-                  {/* Blue border circle */}
-                  <circle
-                    cx="5"
-                    cy="5"
-                    r="4.5"
-                    stroke="#0ea5e9"
-                    strokeWidth="1.2"
-                  />
-                </svg>
-              </span>
-            </span>
-
-            {/* Pink period '.' */}
-            <span className="text-[#f43f5e] font-black inline-block ml-0.5 group-hover:animate-pulse">
+            <span className="hero-headline text-xl font-extrabold tracking-tight text-[#f43f5e] sm:text-2xl leading-none group-hover:animate-pulse">
               .
             </span>
-          </span>
+          </div>
         </motion.a>
 
         {/* Desktop Nav Links */}
