@@ -10,7 +10,9 @@ export default defineConfig({
     tailwindcss(),
     tsConfigPaths({ projects: ["./tsconfig.json"] }),
     tanstackStart({
-      server: { entry: "server" },
+      server: { 
+        preset: "cloudflare-pages",
+      },
       serverFns: {
         disableCsrfMiddlewareWarning: true,
       },
