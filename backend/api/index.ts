@@ -109,6 +109,20 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend is running on Vercel!' });
 });
 
+app.get('/', (req, res) => {
+  res.send(`
+    <html>
+      <body style="background: #0d1117; color: #e6edf3; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center;">
+        <div>
+          <h2>🚀 Sasi Portfolio Backend API</h2>
+          <p style="color: #3fb950;">Status: Online & Running Perfectly!</p>
+          <p style="color: #8b949e;">API is ready to accept contact form submissions.</p>
+        </div>
+      </body>
+    </html>
+  `);
+});
+
 // Start local server if not running on Vercel
 if (process.env.NODE_ENV !== 'production' && require.main === module) {
   const PORT = process.env.PORT || 5000;
