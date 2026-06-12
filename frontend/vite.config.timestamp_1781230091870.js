@@ -1,0 +1,52 @@
+// vite.config.ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import tsConfigPaths from "vite-tsconfig-paths";
+import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import path from "path";
+var vite_config_default = defineConfig({
+  plugins: [
+    tailwindcss(),
+    tsConfigPaths({ projects: ["./tsconfig.json"] }),
+    tanstackStart({
+      server: {
+        preset: "cloudflare-pages"
+      },
+      serverFns: {
+        disableCsrfMiddlewareWarning: true
+      },
+      importProtection: {
+        behavior: "error",
+        client: {
+          files: ["**/server/**"],
+          specifiers: ["server-only"]
+        }
+      }
+    }),
+    react()
+  ],
+  css: {
+    transformer: "lightningcss"
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src")
+    },
+    dedupe: [
+      "react",
+      "react-dom",
+      "react/jsx-runtime",
+      "react/jsx-dev-runtime",
+      "@tanstack/react-query",
+      "@tanstack/query-core"
+    ]
+  },
+  server: {
+    host: "::",
+    port: 8080
+  }
+});
+export {
+  vite_config_default as default
+};
