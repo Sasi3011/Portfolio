@@ -52,7 +52,7 @@ app.post('/api/contact', async (req, res) => {
     if (!dbRes.ok) {
       const err = await dbRes.text();
       console.error("Supabase Error:", err);
-      return res.status(500).json({ success: false, error: 'Failed to save message to database' });
+      return res.status(500).json({ success: false, error: `Database Error: ${err}` });
     }
 
     const dbData = await dbRes.json();
